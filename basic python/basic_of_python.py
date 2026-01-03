@@ -13,7 +13,7 @@ print("--- Starting Your Python Journey! ---")
 
 print("\n--- Part 1: Python Basics ---")
 
-# --- 1.1 Syntax and Comments ---
+#! --- 1.1 Syntax and Comments ---
 # Python's syntax is known for being clean and readable.
 # It uses indentation (usually 4 spaces) to define code blocks, instead of brackets.
 
@@ -25,7 +25,7 @@ multi-line comment, often used for docstrings
 at the beginning of functions or modules.
 """
 
-# --- 1.2 Variables and Data Types ---
+#! --- 1.2 Variables and Data Types ---
 # Variables are containers for storing data values.
 # Python is dynamically typed, so you don't need to declare the type of a variable.
 
@@ -49,7 +49,7 @@ print("Boolean:", a_boolean)
 print("Type of a_string:", type(a_string))
 
 
-# --- 1.3 Type Casting ---
+#! --- 1.3 Type Casting ---
 # You can convert between data types.
 int_from_float = int(a_float) # will be 3 (truncates, doesn't round)
 float_from_int = float(an_integer) # will be 10.0
@@ -60,7 +60,7 @@ print("Casted float:", float_from_int)
 print("Casted string:", string_from_int)
 
 
-# --- 1.4 Basic Operators ---
+#! --- 1.4 Basic Operators ---
 # Arithmetic Operators
 x = 10
 y = 3
@@ -86,7 +86,7 @@ print("p or q is", p or q)   # or (True if at least one is True)
 print("not p is", not p)     # not (inverts the boolean)
 
 
-# --- 1.5 String Manipulation ---
+#! --- 1.5 String Manipulation ---
 s = "Journey Before Destination"
 
 # Length of a string
@@ -113,13 +113,13 @@ age = 20
 print(f"{name} is {age} years old.")
 
 
-# ==============================================================================
-# Part 2: Data Structures
-# ==============================================================================
+#! ==============================================================================
+#! Part 2: Data Structures
+#! ==============================================================================
 
 print("\n--- Part 2: Data Structures ---")
 
-# --- 2.1 Lists ---
+#! --- 2.1 Lists ---
 # Ordered, changeable (mutable), and allow duplicate members.
 my_list = [1, "apple", 3.14, "apple"]
 print("My list:", my_list)
@@ -150,7 +150,7 @@ squares = [i**2 for i in range(5)] # creates a list of squares from 0 to 4
 print("List of squares:", squares)
 
 
-# --- 2.2 Tuples ---
+#! --- 2.2 Tuples ---
 # Ordered, unchangeable (immutable), and allow duplicate members.
 my_tuple = (1, "apple", 3.14, "apple")
 print("My tuple:", my_tuple)
@@ -158,7 +158,7 @@ print("My tuple:", my_tuple)
 # my_tuple[1] = "banana" # This would cause a TypeError
 
 
-# --- 2.3 Sets ---
+#! --- 2.3 Sets ---
 # Unordered, unindexed, and do not allow duplicate members.
 my_set = {1, "apple", 3.14}
 print("My set:", my_set)
@@ -169,7 +169,7 @@ my_set.add("apple")
 print("Set after adding duplicate:", my_set)
 
 
-# --- 2.4 Dictionaries ---
+#! --- 2.4 Dictionaries (or Maps) ---
 # Unordered (in older Python versions), changeable, and indexed.
 # They store data in key:value pairs.
 my_dict = {
@@ -203,14 +203,48 @@ print("Iterating through key-value pairs:")
 for key, value in my_dict.items():
   print(f"{key}: {value}")
 
+#! --- 2.5 Core Data Structures: List vs. Set vs. Dictionary ---
+# These three data structures are the workhorses of Python. Understanding their differences is crucial.
+#
+# Key Differences Summarized:
+#
+# Aspect         | List                                    | Set                                     | Dictionary (Map)
+# ---------------|-----------------------------------------|-----------------------------------------|---------------------------------------------
+# Structure      | Ordered collection of items .            | Unordered collection of unique items.   | Unordered collection of key-value pairs.
+# Ordering       | Ordered (maintains insertion order).    | Unordered (does not guarantee order).   | Ordered (since Python 3.7).
+# Indexing       | Accessed by numeric index (e.g., `[0]`). | Cannot be indexed.                      | Accessed by key (e.g., `["name"]`).
+# Mutability     | Mutable (can be changed).               | Mutable (can be changed).               | Mutable (can be changed).
+# Duplicates     | Allows duplicate elements.              | Does NOT allow duplicate elements.      | Does NOT allow duplicate keys.
+# Syntax         | `my_list = [1, "a", 1]`                 | `my_set = {1, "a"}`                     | `my_dict = {"key1": 1, "name": "a"}`
+#
+# --- When to Use Each ---
+#
+# Use a LIST when:
+# - You need an ordered sequence of items.
+# - The order matters and you need to access items by their position.
+# - You might have duplicate items.
+# - Example: A list of steps in a recipe, a leaderboard of scores.
+#
+# Use a SET when:
+# - You need to store a collection of UNIQUE items.
+# - Membership testing (checking if an item is in the collection) is a primary concern (it's very fast).
+# - You want to perform mathematical set operations (union, intersection, difference).
+# - Example: Storing a list of unique user IDs, finding the unique vowels in a word.
+#
+# Use a DICTIONARY (or MAP) when:
+# - You need to store data as key-value pairs.
+# - You want to associate specific pieces of information with a unique identifier (the key).
+# - You need fast lookups based on a key.
+# - Example: Storing a user's profile (name, age, email), representing structured data from a database.
+#
 
-# ==============================================================================
-# Part 3: Control Flow
-# ==============================================================================
+#! ==============================================================================
+#! Part 3: Control Flow
+#! ==============================================================================
 
 print("\n--- Part 3: Control Flow ---")
 
-# --- 3.1 Conditional Statements ---
+#! --- 3.1 Conditional Statements ---
 # if, elif, else
 temperature = 25
 
@@ -221,7 +255,7 @@ elif temperature > 20:
 else:
   print("It's a cool day.")
 
-# --- 3.2 Loops ---
+#! --- 3.2 Loops ---
 # 'for' loop - for iterating over a sequence
 fruits = ["apple", "banana", "cherry"]
 print("Fruits:")
