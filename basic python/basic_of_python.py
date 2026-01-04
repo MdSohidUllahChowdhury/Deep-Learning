@@ -290,9 +290,9 @@ for i in range(10):
   print(i)
 
 
-# ==============================================================================
-# Part 4: Functions
-# ==============================================================================
+#! ==============================================================================
+#! Part 4: Functions
+#! ==============================================================================
 
 print("\n--- Part 4: Functions ---")
 
@@ -300,27 +300,27 @@ print("\n--- Part 4: Functions ---")
 # You can pass data, known as parameters, into a function.
 # A function can return data as a result.
 
-# --- 4.1 Defining and Calling a Function ---
+#! --- 4.1 Defining and Calling a Function ---
 def greet():
   print("Hello from a function!")
 
 greet() # Calling the function
 
-# --- 4.2 Parameters and Arguments ---
+#! --- 4.2 Parameters and Arguments ---
 def greet_person(name, greeting="Hello"): # 'greeting' has a default value
   print(f"{greeting}, {name}!")
 
 greet_person("Alice") # Uses the default greeting
 greet_person("Bob", "Good morning") # Overrides the default
 
-# --- 4.3 Return Values ---
+#! --- 4.3 Return Values ---
 def add_numbers(x, y):
   return x + y
 
 sum_result = add_numbers(5, 3)
 print("Result of add_numbers:", sum_result)
 
-# --- 4.4 Lambda Functions ---
+#! --- 4.4 Lambda Functions ---
 # A small anonymous function.
 # Can take any number of arguments, but can only have one expression.
 # lambda arguments: expression
@@ -328,9 +328,9 @@ multiply = lambda a, b: a * b
 print("Result of lambda multiply:", multiply(5, 6))
 
 
-# ==============================================================================
-# Part 5: File Handling
-# ==============================================================================
+#! ==============================================================================
+#! Part 5: File Handling
+#! ==============================================================================
 
 print("\n--- Part 5: File Handling ---")
 
@@ -365,50 +365,132 @@ with open("my_learning_file.txt", "r") as f:
 
 print("\n--- Part 6: Object-Oriented Programming (OOP) ---")
 
-# OOP is a way of structuring programs so that properties and behaviors are bundled
-# into individual objects.
+# Object-Oriented Programming is a programming paradigm centered around "objects" rather than functions and logic.
+# An object is a self-contained entity that consists of both data (attributes) and procedures (methods).
+# OOP is based on four fundamental principles, often called the "four pillars."
 
-# --- 6.1 Classes and Objects ---
-# A class is a blueprint for creating objects.
-# An object is an instance of a class.
+# --- Pillar 1: Encapsulation ---
+# Encapsulation is the bundling of data (attributes) and the methods that operate on that data into a single unit (a class).
+# It restricts direct access to some of an object's components, which is a key principle of data hiding.
+# In Python, we use conventions to denote private attributes (e.g., a single underscore `_` prefix).
 
-class Dog:
-  # Class attribute (shared by all instances)
-  species = "Canis familiaris"
+class Car:
+    def __init__(self, make, model):
+        self.make = make          # Public attribute
+        self._model = model       # "Protected" attribute (convention)
+        self.__speed = 0          # "Private" attribute (name mangling)
 
-  # The constructor method, called when a new object is created
-  def __init__(self, name, age):
-    # Instance attributes (unique to each instance)
-    self.name = name
-    self.age = age
 
-  # A method (a function inside a class)
-  def bark(self):
-    print(f"{self.name} says Woof!")
+    def accelerate(self):
+        self.__speed += 10
+        print(f"The {self.make} is accelerating. Current speed: {self.__speed} mph.")
 
-# Create objects (instances) of the Dog class
-my_dog = Dog("Buddy", 5)
-your_dog = Dog("Lucy", 3)
 
-# Access attributes and call methods
-print(f"{my_dog.name} is a {my_dog.species} and is {my_dog.age} years old.")
-my_dog.bark()
-your_dog.bark()
+    def brake(self):
+        if self.__speed > 0:
+            self.__speed -= 7
+        print(f"The {self.make} is slowing down. Current speed: {self.__speed} mph.")
 
-# --- 6.2 Inheritance ---
-# You can create a new class that inherits attributes and methods from another class.
-class GoldenRetriever(Dog): # Inherits from Dog
-  def __init__(self, name, age, color="golden"):
-    super().__init__(name, age) # Call the parent class's constructor
-    self.color = color
+# The user of the Car object doesn't need to know *how* the speed is managed,
+# they just use the `accelerate` and `brake` methods. The `__speed` is encapsulated.
+my_car = Car("Tesla", "Model S")
+my_car.accelerate()
+# print(my_car.__speed) # This would raise an AttributeError, enforcing encapsulation.
 
-  # You can override methods from the parent class
-  def bark(self):
-    print(f"{self.name} gives a friendly woof!")
 
-my_retriever = GoldenRetriever("Sunny", 2)
-print(f"{my_retriever.name} is a Golden Retriever.")
-my_retriever.bark() # This calls the overridden method
+# --- Pillar 2: Inheritance ---
+# Inheritance is the mechanism by which one class (the "child" or "subclass") can
+# inherit the attributes and methods of another class (the "parent" or "superclass").
+# This promotes code reuse ("Don't Repeat Yourself").
+
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        raise NotImplementedError("Subclass must implement this abstract method")
+
+# The Dog class inherits from Animal. It gets the `name` attribute and the `speak` method.
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+# The Cat class also inherits from Animal.
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+my_dog = Dog("Buddy")
+print(my_dog.speak()) # Output: Buddy says Woof!
+
+my_cat = Cat("Whiskers")
+print(my_cat.speak()) # Output: Whiskers says Meow!
+
+
+# --- Pillar 3: Polymorphism ---
+# Polymorphism, from the Greek for "many forms," allows objects of different classes
+# to be treated as objects of a common superclass. It's the ability for a method
+# to do different things depending on the object it is acting upon.
+
+# We can see polymorphism in action with our Animal classes.
+# We can write a function that works with any Animal, and it will behave
+# correctly based on the actual type of animal passed to it.
+
+def make_animal_speak(animal):
+    print(animal.speak())
+
+# We can pass a Dog or a Cat object to the same function.
+make_animal_speak(my_dog)
+make_animal_speak(my_cat)
+
+# Another example is the `+` operator. For numbers, it adds. For strings, it concatenates.
+# This is a form of polymorphism.
+print(1 + 2)       #
+print("Hello" + " " + "World")
+
+
+# --- Pillar 4: Abstraction ---
+# Abstraction means hiding complex implementation details and showing only the
+# essential features of the object. It's about simplifying a complex system.
+# When you drive a car, you don't need to know how the engine works internally.
+# You just need to know how to use the steering wheel, pedals, and gear shift.
+
+# In Python, we often use abstract base classes (ABCs) to define a common interface.
+from abc import ABC, abstractmethod
+
+class Shape(ABC): # This is now an abstract class
+    @abstractmethod
+    def area(self):
+        pass
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+# The `Shape` class provides an abstraction. Any class that inherits from `Shape`
+# *must* provide its own implementation for `area` and `perimeter`.
+
+class Square(Shape):
+    def __init__(self, side_length):
+        self.side_length = side_length
+    def area(self):
+        return self.side_length ** 2
+    def perimeter(self):
+        return 4 * self.side_length
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    def area(self):
+        return 3.14 * self.radius ** 2
+    def perimeter(self):
+        return 2 * 3.14 * self.radius
+
+# We can now create objects and use their methods without needing to know the
+# complex formulas behind them. The complexity is abstracted away.
+my_square = Square(10)
+print(f"Square area: {my_square.area()}")
+
+my_circle = Circle(5)
+print(f"Circle area: {my_circle.area()}")
 
 
 # ==============================================================================
